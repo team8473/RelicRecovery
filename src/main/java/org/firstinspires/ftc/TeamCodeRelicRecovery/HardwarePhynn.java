@@ -6,10 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-/**
- * Created by wahle on 1/22/2018.
- */
-
 public class HardwarePhynn {
 
     public DcMotor motorRight = null;
