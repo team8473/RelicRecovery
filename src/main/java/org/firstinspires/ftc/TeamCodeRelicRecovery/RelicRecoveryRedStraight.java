@@ -54,7 +54,7 @@ public class RelicRecoveryRedStraight extends LinearOpMode {
         Lift = hardwareMap.dcMotor.get("lift");
         ColorSensor = hardwareMap.colorSensor.get("mr");
         MotorLeft.setDirection(DcMotor.Direction.REVERSE);
-        Servo2.setDirection(Servo.Direction.REVERSE);
+        Servo2.setDirection(Servo.Direction.REVERSE);//hi
 
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
