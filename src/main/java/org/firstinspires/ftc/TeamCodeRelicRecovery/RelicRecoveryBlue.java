@@ -2,11 +2,8 @@ package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -19,21 +16,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 @Autonomous(name="Blue", group="Gabe")
 //@Disabled
 public class RelicRecoveryBlue extends LinearOpMode {
-
-    //Define controllers
-    private DcMotor MotorRight;
-    private DcMotor MotorLeft;
-    private DcMotor Lift;
-    private Servo Servo1;
-    private Servo Servo2;
-    private Servo Servo3;
-    private ColorSensor ColorSensor;
-
-    private double See;
-    {
-        See = 0;
-    }
-
+    
+    private HardwarePhynn   robot   = new HardwarePhynn();
     private ElapsedTime     runtime = new ElapsedTime();
 
     private static final double     COUNTS_PER_MOTOR_REV    = 374 ;    // eg: ANDY MARK Motor Encoder
@@ -47,16 +31,7 @@ public class RelicRecoveryBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        MotorRight = hardwareMap.dcMotor.get("front right");
-        MotorLeft = hardwareMap.dcMotor.get("front left");
-        Servo1 = hardwareMap.servo.get("servo1");
-        Servo2 = hardwareMap.servo.get("servo2");
-        Servo3 = hardwareMap.servo.get("servo3");
-        Lift = hardwareMap.dcMotor.get("lift");
-        ColorSensor = hardwareMap.colorSensor.get("mr");
-
-        MotorLeft.setDirection(DcMotor.Direction.REVERSE);
-        Servo2.setDirection(Servo.Direction.REVERSE);
+        robot.init(hardwareMap);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -72,26 +47,26 @@ public class RelicRecoveryBlue extends LinearOpMode {
         waitForStart();
         relicTrackables.activate();
 
-        MotorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        MotorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(10);
-        MotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        MotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         while (opModeIsActive()) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN && See == 0) {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN && robot.See) {
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
                 telemetry.addData("Pose", format(pose));
                 if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     Start();
-                    if (ColorSensor.red() > ColorSensor.blue()) {
+                    if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
                         Red();
                         encoderDrive(DRIVE_SPEED, -33.5, -33.5, 10);
                         encoderDrive(TURN_SPEED, 14.5, -14.5, 10); //90 degree turn
                         End();
-                    }else if (ColorSensor.blue() > ColorSensor.red()){
+                    }else if (robot.ColorSensor.blue() > robot.ColorSensor.red()){
                         Blue();
                         encoderDrive(DRIVE_SPEED, -38, -38, 10);
                         encoderDrive(TURN_SPEED, 13, -13, 10); //90 degree turn
@@ -99,12 +74,12 @@ public class RelicRecoveryBlue extends LinearOpMode {
                     }
                 }else if (vuMark == RelicRecoveryVuMark.CENTER) {
                     Start();
-                    if (ColorSensor.red() > ColorSensor.blue()) {
+                    if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
                         Red();
                         encoderDrive(DRIVE_SPEED, -26, -26, 10);
                         encoderDrive(TURN_SPEED, 14.5, -14.5, 10); //90 degree turn
                         End();
-                    }else if (ColorSensor.blue() > ColorSensor.red()){
+                    }else if (robot.ColorSensor.blue() > robot.ColorSensor.red()){
                         Blue();
                         encoderDrive(DRIVE_SPEED, -30.5, -30.5, 10);
                         encoderDrive(TURN_SPEED, 14, -14, 10); //90 degree turn
@@ -112,12 +87,12 @@ public class RelicRecoveryBlue extends LinearOpMode {
                     }
                 }else if (vuMark == RelicRecoveryVuMark.LEFT) {
                     Start();
-                        if (ColorSensor.red() > ColorSensor.blue()) {
+                        if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
                             Red();
                             encoderDrive(DRIVE_SPEED, -18, -18, 10);
                             encoderDrive(TURN_SPEED, 14.5, -14.5, 15); //90 degree turn
                             End();
-                        }else if (ColorSensor.blue() > ColorSensor.red()){
+                        }else if (robot.ColorSensor.blue() > robot.ColorSensor.red()){
                             Blue();
                             encoderDrive(DRIVE_SPEED, -22.5, -22.5, 10);
                             encoderDrive(TURN_SPEED, 14, -14, 10); //90 degree turn
@@ -137,52 +112,52 @@ public class RelicRecoveryBlue extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = MotorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = MotorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            MotorRight.setTargetPosition(newLeftTarget);
-            MotorLeft.setTargetPosition(newRightTarget);
+            newLeftTarget = robot.motorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = robot.motorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            robot.motorRight.setTargetPosition(newLeftTarget);
+            robot.motorLeft.setTargetPosition(newRightTarget);
 
             // Turn On RUN_TO_POSITION
-            MotorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            MotorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
-            MotorRight.setPower(Math.abs(speed));
-            MotorLeft.setPower(Math.abs(speed));
+            robot.motorRight.setPower(Math.abs(speed));
+            robot.motorLeft.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
-                    (MotorRight.isBusy() && MotorLeft.isBusy())) {
-                telemetry.addData("Motor1", MotorRight.getCurrentPosition());
-                telemetry.addData("Motor2", MotorLeft.getCurrentPosition());
+                    (robot.motorRight.isBusy() && robot.motorLeft.isBusy())) {
+                telemetry.addData("Motor1", robot.motorRight.getCurrentPosition());
+                telemetry.addData("Motor2", robot.motorLeft.getCurrentPosition());
                 telemetry.update();
 
             }
 
             // Stop all motion;
-            MotorRight.setPower(0);
-            MotorLeft.setPower(0);
+            robot.motorRight.setPower(0);
+            robot.motorLeft.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            MotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            MotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
 
     }
     private void Start()
     {
-        Servo1.setPosition(.65);
-        Servo2.setPosition(.65);
-        Lift.setPower(.4);
+        robot.servo1.setPosition(.65);
+        robot.servo2.setPosition(.65);
+        robot.Lift.setPower(.4);
         sleep(1000);
-        Lift.setPower(0);
-        Servo3.setPosition(.3);
+        robot.Lift.setPower(0);
+        robot.servo3.setPosition(.3);
         sleep(1000);
-        telemetry.addData("Blue", ColorSensor.blue());
-        telemetry.addData("Red", ColorSensor.red());
+        telemetry.addData("Blue", robot.ColorSensor.blue());
+        telemetry.addData("Red", robot.ColorSensor.red());
         telemetry.update();
         sleep(2500);
     }
@@ -193,22 +168,22 @@ public class RelicRecoveryBlue extends LinearOpMode {
     private void Red()
     {
         encoderDrive(DRIVE_SPEED, -4, -4, 10);
-        Servo3.setPosition(.85);
+        robot.servo3.setPosition(.85);
     }
     private void Blue()
     {
         encoderDrive(DRIVE_SPEED, -6, 6, 10);
-        Servo3.setPosition(.85);
+        robot.servo3.setPosition(.85);
         encoderDrive(DRIVE_SPEED, 6, -6, 10);
     }
     private void End()
     {
         encoderDrive(DRIVE_SPEED, 8.5, 8.5, 10);
-        Servo1.setPosition(.1);
-        Servo2.setPosition(.1);
+        robot.servo1.setPosition(.1);
+        robot.servo2.setPosition(.1);
         sleep(500);
         encoderDrive(DRIVE_SPEED, -3.5, -3.5, 10);
-        See = 1;
+        robot.See = false;
     }
 
 }

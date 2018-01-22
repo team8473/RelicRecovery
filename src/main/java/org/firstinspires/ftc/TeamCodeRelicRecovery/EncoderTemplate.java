@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -12,10 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Disabled
 public class EncoderTemplate extends LinearOpMode {
 
-    private DcMotor MotorRight;
-    private DcMotor MotorLeft;
-
     //Variables for Encoders
+    private HardwarePhynn   robot   = new HardwarePhynn();
     private ElapsedTime     runtime = new ElapsedTime();
 
     private static final double     COUNTS_PER_MOTOR_REV    = 374 ;      // eg: ANDY MARK Motor Encoder
@@ -32,20 +29,14 @@ public class EncoderTemplate extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        MotorRight = hardwareMap.dcMotor.get("front right");
-        MotorLeft = hardwareMap.dcMotor.get("front left");
-        Servo servo2 = hardwareMap.servo.get("servo2");
-
-        MotorLeft.setDirection(DcMotor.Direction.REVERSE);
-        servo2.setDirection(Servo.Direction.REVERSE);
-
+        
         waitForStart();
 
-        MotorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        MotorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(10);
-        MotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        MotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             encoderTurn(90, RIGHT);
             encoderDrive(DRIVE_SPEED, 15, 15, 15);
@@ -64,38 +55,38 @@ public class EncoderTemplate extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = MotorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = MotorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            MotorRight.setTargetPosition(newLeftTarget);
-            MotorLeft.setTargetPosition(newRightTarget);
+            newLeftTarget = robot.motorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = robot.motorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            robot.motorRight.setTargetPosition(newLeftTarget);
+            robot.motorLeft.setTargetPosition(newRightTarget);
 
             // Turn On RUN_TO_POSITION
-            MotorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            MotorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
-            MotorRight.setPower(Math.abs(speed));
-            MotorLeft.setPower(Math.abs(speed));
+            robot.motorRight.setPower(Math.abs(speed));
+            robot.motorLeft.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
-                    (MotorRight.isBusy() && MotorLeft.isBusy())) {
+                    (robot.motorRight.isBusy() && robot.motorLeft.isBusy())) {
 
-                telemetry.addData("Motor1", MotorRight.getCurrentPosition());
-                telemetry.addData("Motor2", MotorLeft.getCurrentPosition());
+                telemetry.addData("Motor1", robot.motorRight.getCurrentPosition());
+                telemetry.addData("Motor2", robot.motorLeft.getCurrentPosition());
                 telemetry.update();
 
             }
 
             // Stop all motion;
-            MotorRight.setPower(0);
-            MotorLeft.setPower(0);
+            robot.motorRight.setPower(0);
+            robot.motorLeft.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            MotorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            MotorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
 
