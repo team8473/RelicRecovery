@@ -35,8 +35,8 @@ public class HardwarePhynn {
     public static final double     kI                      = 0;
     public static final double     kD                      = 0;
 
-    boolean Open = true;
-    boolean See = true;
+    public boolean Open = true;
+    public boolean See = true;
 
     HardwareMap hwMap = null;
 
