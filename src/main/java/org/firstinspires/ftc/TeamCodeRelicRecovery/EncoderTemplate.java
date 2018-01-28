@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.ROBOT_LONG_DIAMETER_IN;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.ROBOT_SHORT_DIAMETER_IN;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.TURN_SPEED;
 
 
@@ -17,58 +15,58 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.TURN_SPE
 public class EncoderTemplate extends LinearOpMode {
 
     //Variables for Encoders
-    private HardwarePhynn   robot   = new HardwarePhynn();
+    private HardwarePhynn phynn = new HardwarePhynn();
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
 
     }
 
 
     public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
+                             double distance,
                              double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
+        int newTarget;
 
-        // Ensure that the opmode is still active
         if (opModeIsActive()) {
+            newTarget = phynn.motorLeft.getCurrentPosition() + (int)(distance * COUNTS_PER_INCH);
+            if (speed == TURN_SPEED){
+                phynn.motorRight.setTargetPosition(newTarget);
+                phynn.motorLeft.setTargetPosition(-newTarget);
+            }
+            else if (speed == -TURN_SPEED){
+                phynn.motorRight.setTargetPosition(-newTarget);
+                phynn.motorLeft.setTargetPosition(newTarget);
+            }
+            else {
+                phynn.motorRight.setTargetPosition(newTarget);
+                phynn.motorLeft.setTargetPosition(newTarget);
+            }
 
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = robot.motorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = robot.motorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            robot.motorRight.setTargetPosition(newLeftTarget);
-            robot.motorLeft.setTargetPosition(newRightTarget);
+            phynn.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            phynn.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            // Turn On RUN_TO_POSITION
-            robot.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            phynn.runtime.reset();
+            phynn.motorRight.setPower(Math.abs(speed));
+            phynn.motorLeft.setPower(Math.abs(speed));
 
-            // reset the timeout time and start motion.
-            robot.runtime.reset();
-            robot.motorRight.setPower(Math.abs(speed));
-            robot.motorLeft.setPower(Math.abs(speed));
-
-            // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
-                    (robot.runtime.seconds() < timeoutS) &&
-                    (robot.motorRight.isBusy() && robot.motorLeft.isBusy())) {
+                    (phynn.runtime.seconds() < timeoutS) &&
+                    (phynn.motorRight.isBusy() && phynn.motorLeft.isBusy())) {
 
-                telemetry.addData("Motor1", robot.motorRight.getCurrentPosition());
-                telemetry.addData("Motor2", robot.motorLeft.getCurrentPosition());
+                telemetry.addData("Motor1", phynn.motorRight.getCurrentPosition());
+                telemetry.addData("Motor2", phynn.motorLeft.getCurrentPosition());
                 telemetry.update();
 
             }
 
-            // Stop all motion;
-            robot.motorRight.setPower(0);
-            robot.motorLeft.setPower(0);
+            phynn.motorRight.setPower(0);
+            phynn.motorLeft.setPower(0);
 
-            // Turn off RUN_TO_POSITION
-            robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            phynn.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
 
@@ -76,21 +74,16 @@ public class EncoderTemplate extends LinearOpMode {
     public void encoderTurn(double turnAngle,
                              double direction)
     {
-
-        double shortSquared = Math.pow(.5 * ROBOT_SHORT_DIAMETER_IN, 2);
-        double longSquared = Math.pow(.5 * ROBOT_LONG_DIAMETER_IN, 2);
-        double sqRoot = Math.sqrt(2 * (shortSquared + longSquared));
         double circleFraction = turnAngle / 360;
-        double robotCircumference = (3.1415 * sqRoot);
-        double inches = (circleFraction * robotCircumference);
+        double inches = (circleFraction * phynn.robotCircumference);
 
         if (opModeIsActive() && direction == RIGHT)
         {
-            encoderDrive(TURN_SPEED, inches, -inches, 10);
+            encoderDrive(TURN_SPEED, inches, 10);
 
         }else if (opModeIsActive() && direction == LEFT)
         {
-            encoderDrive(TURN_SPEED, -inches, inches, 10);
+            encoderDrive(-TURN_SPEED, inches, 10);
         }
     }
 

@@ -10,14 +10,14 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 @Disabled
 public class TouchSensorTest extends LinearOpMode {
 
-    private HardwarePhynn robot = new HardwarePhynn();
+    private HardwarePhynn phynn = new HardwarePhynn();
 
     private DigitalChannel digitalTouch = null;
 
     @Override
     public void runOpMode() throws InterruptedException{
 
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
 
         digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 

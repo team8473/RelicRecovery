@@ -8,17 +8,17 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 public class Lift extends LinearOpMode {
 
-    HardwarePhynn robot = new HardwarePhynn();
+    private HardwarePhynn phynn = new HardwarePhynn();
 
     public void runOpMode(){
 
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
 
     }
-    public void Lift()
+    public void lift()
     {
         float lift = gamepad2.left_stick_y;
         lift = Range.clip(-lift, -1, 1);
-        robot.Lift.setPower(Range.clip(lift, -.6, .6));
+        phynn.Lift.setPower(Range.clip(lift, -.6, .6));
     }
 }

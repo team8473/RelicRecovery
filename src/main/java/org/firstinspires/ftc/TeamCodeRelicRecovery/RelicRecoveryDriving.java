@@ -3,15 +3,9 @@ package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.DriveFast;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.DriveNormal;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.DriveSlow;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.DriveStop;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.GrabbersClose;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.GrabbersHalf;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.GrabbersOpen;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
 
 @TeleOp(name = "RelicRecovery", group = "Gabe")
@@ -19,52 +13,48 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
 public class RelicRecoveryDriving extends LinearOpMode {
 
     //Importing all outside programs used
-    private HardwarePhynn robot  = new HardwarePhynn();
-    private GrabbersClose close  = new GrabbersClose();
-    private GrabbersOpen  open   = new GrabbersOpen();
-    private GrabbersHalf  half   = new GrabbersHalf();
-    private DriveNormal   normal = new DriveNormal();
-    private DriveFast     fast   = new DriveFast();
-    private DriveSlow     slow   = new DriveSlow();
-    private DriveStop     stop   = new DriveStop();
-    private Lift          lift   = new Lift();
+    private HardwarePhynn phynn      = new HardwarePhynn();
+    private Grabbers      grabbers   = new Grabbers();
+    private Drive         drive      = new Drive();
+    private Drive         fast       = new Drive();
+    private Lift          lift       = new Lift();
 
     @Override
     public void runOpMode() throws InterruptedException{
 
         //Hardware
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
         
         waitForStart();
 
         while (opModeIsActive()){
 
-            //Lift
-            lift.Lift();
+            //lift
+            lift.lift();
 
             //Color sensor arm
-            robot.servo3.setPosition(.85);
+            phynn.servo3.setPosition(.85);
 
             //Grabbers
-            if (gamepad2.a && robot.Open)
+            if (gamepad2.a && phynn.Claws_Open)
             {
-                close.Close();
+                grabbers.Close();
                 sleep(250);
             }
-            if (gamepad2.a && !robot.Open)
+            if (gamepad2.a && !phynn.Claws_Open)
             {
-                open.Open();
+                grabbers.Open();
                 sleep(250);
             }
             if (gamepad2.b)
             {
-               half.Half();
+               grabbers.Half();
             }
 
             //Driving
             if (gamepad1.right_bumper && !gamepad2.right_bumper)
             {
-                slow.slowDrive();
+                drive.slowDrive();
             }
             else if(gamepad1.left_bumper && !gamepad2.right_bumper)
             {
@@ -72,11 +62,11 @@ public class RelicRecoveryDriving extends LinearOpMode {
             }
             else if(gamepad2.right_bumper)
             {
-                stop.stopDrive();
+                drive.stopDrive();
             }
             else if (!gamepad1.right_bumper && !gamepad2.right_bumper)
             {
-                normal.normalDrive();
+                drive.drive();
             }
         }
     }

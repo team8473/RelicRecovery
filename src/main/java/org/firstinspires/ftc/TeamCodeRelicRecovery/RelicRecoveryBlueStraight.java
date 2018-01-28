@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class RelicRecoveryBlueStraight extends LinearOpMode {
 
     //Variables for Encoders
-    private HardwarePhynn   robot   = new HardwarePhynn();
+    private HardwarePhynn phynn = new HardwarePhynn();
     private ElapsedTime     runtime = new ElapsedTime();
 
     private static final double     COUNTS_PER_MOTOR_REV    = 374 ;    // eg: ANDY MARK Motor Encoder
@@ -32,7 +32,7 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
         
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -49,28 +49,28 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
         relicTrackables.activate();
 
         //Set Motors to use Encoders
-        robot.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        phynn.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        phynn.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(10);
-        robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        phynn.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         while (opModeIsActive()) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN && robot.See) {
+            if (vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 telemetry.addData("VuMark", "%s visible", vuMark);
                 OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
                 telemetry.addData("Pose", format(pose));
                 if (vuMark == RelicRecoveryVuMark.RIGHT) {
                     Start();
-                    if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
+                    if (phynn.ColorSensor.red() > phynn.ColorSensor.blue()) {
                         Red();
                         encoderDrive(DRIVE_SPEED, -17.5, -17.5, 15);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         encoderDrive(DRIVE_SPEED, 19, 19, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         End();
-                    } else if (robot.ColorSensor.blue() > robot.ColorSensor.red()) {
+                    } else if (phynn.ColorSensor.blue() > phynn.ColorSensor.red()) {
                         Blue();
                         encoderDrive(DRIVE_SPEED, -21, -21, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
@@ -82,14 +82,14 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
 
                 }else if (vuMark == RelicRecoveryVuMark.CENTER) {
                     Start();
-                    if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
+                    if (phynn.ColorSensor.red() > phynn.ColorSensor.blue()) {
                         Red();
                         encoderDrive(DRIVE_SPEED, -17.5, -17.5, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         encoderDrive(DRIVE_SPEED, 13, 13, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         End();
-                    } else if (robot.ColorSensor.blue() > robot.ColorSensor.red()) {
+                    } else if (phynn.ColorSensor.blue() > phynn.ColorSensor.red()) {
                         Blue();
                         encoderDrive(DRIVE_SPEED, -21, -21, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
@@ -101,14 +101,14 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
 
                 }else if (vuMark == RelicRecoveryVuMark.LEFT) {
                     Start();
-                    if (robot.ColorSensor.red() > robot.ColorSensor.blue()) {
+                    if (phynn.ColorSensor.red() > phynn.ColorSensor.blue()) {
                         Red();
                         encoderDrive(DRIVE_SPEED, -17.5, -17.5, 15);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         encoderDrive(DRIVE_SPEED, 6, 6, 10);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
                         End();
-                    } else if (robot.ColorSensor.blue() > robot.ColorSensor.red()) {
+                    } else if (phynn.ColorSensor.blue() > phynn.ColorSensor.red()) {
                         Blue();
                         encoderDrive(DRIVE_SPEED, -21, -21, 15);
                         encoderDrive(TURN_SPEED, -14, 14, 10);
@@ -132,75 +132,75 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = robot.motorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = robot.motorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            robot.motorRight.setTargetPosition(newLeftTarget);
-            robot.motorLeft.setTargetPosition(newRightTarget);
+            newLeftTarget = phynn.motorRight.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRightTarget = phynn.motorLeft.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            phynn.motorRight.setTargetPosition(newLeftTarget);
+            phynn.motorLeft.setTargetPosition(newRightTarget);
 
             // Turn On RUN_TO_POSITION
-            robot.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            phynn.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            phynn.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
-            robot.motorRight.setPower(Math.abs(speed));
-            robot.motorLeft.setPower(Math.abs(speed));
+            phynn.motorRight.setPower(Math.abs(speed));
+            phynn.motorLeft.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                     (runtime.seconds() < timeoutS) &&
-                    (robot.motorRight.isBusy() && robot.motorLeft.isBusy())) {
-                telemetry.addData("Motor1", robot.motorRight.getCurrentPosition());
-                telemetry.addData("Motor2", robot.motorLeft.getCurrentPosition());
+                    (phynn.motorRight.isBusy() && phynn.motorLeft.isBusy())) {
+                telemetry.addData("Motor1", phynn.motorRight.getCurrentPosition());
+                telemetry.addData("Motor2", phynn.motorLeft.getCurrentPosition());
                 telemetry.update();
 
             }
 
             // Stop all motion;
-            robot.motorRight.setPower(0);
-            robot.motorLeft.setPower(0);
+            phynn.motorRight.setPower(0);
+            phynn.motorLeft.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            robot.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            phynn.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
 
     }
     private void Start()
     {
-        robot.servo1.setPosition(.65);
-        robot.servo2.setPosition(.65);
-        robot.Lift.setPower(.4);
+        phynn.servo1.setPosition(.65);
+        phynn.servo2.setPosition(.65);
+        phynn.Lift.setPower(.4);
         sleep(1500);
-        robot.Lift.setPower(0);
-        robot.servo3.setPosition(.3);
+        phynn.Lift.setPower(0);
+        phynn.servo3.setPosition(.3);
         sleep(1000);
-        telemetry.addData("Blue", robot.ColorSensor.blue());
-        telemetry.addData("Red", robot.ColorSensor.red());
+        telemetry.addData("Blue", phynn.ColorSensor.blue());
+        telemetry.addData("Red", phynn.ColorSensor.red());
         telemetry.update();
         sleep(3000);
     }
     private void Red()
     {
         encoderDrive(DRIVE_SPEED, -4, -4, 15);
-        robot.servo3.setPosition(.85);
+        phynn.servo3.setPosition(.85);
     }
     private void Blue()
     {
         encoderDrive(DRIVE_SPEED, -6, 6, 10);
-        robot.servo3.setPosition(.85);
+        phynn.servo3.setPosition(.85);
         encoderDrive(DRIVE_SPEED, 6, -6, 15);
     }
     private void End()
     {
         encoderDrive(DRIVE_SPEED, 5, 5, 10);
-        robot.servo1.setPosition(.1);
-        robot.servo2.setPosition(.1);
+        phynn.servo1.setPosition(.1);
+        phynn.servo2.setPosition(.1);
         sleep(500);
         encoderDrive(DRIVE_SPEED, 4, 4, 10);
         encoderDrive(DRIVE_SPEED, -3, -3, 10);
-        robot.See = false;
+        phynn.See = false;
 
     }
     private String format(OpenGLMatrix transformationMatrix)
