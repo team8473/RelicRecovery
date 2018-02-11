@@ -9,9 +9,7 @@ public class Start extends LinearOpMode {
     HardwarePhynn phynn = new HardwarePhynn();
     Grabbers grabbers = new Grabbers();
 
-
     public void runOpMode() throws InterruptedException{
-
     }
 
     public void Start(){
