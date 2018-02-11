@@ -72,19 +72,17 @@ public class EncoderTemplate extends LinearOpMode {
 
     }
     public void encoderTurn(double turnAngle,
-                             double direction)
+                             String direction)
     {
         double circleFraction = turnAngle / 360;
         double inches = (circleFraction * phynn.robotCircumference);
 
-        if (opModeIsActive() && direction == RIGHT)
-        {
-            encoderDrive(TURN_SPEED, inches, 10);
-
-        }else if (opModeIsActive() && direction == LEFT)
-        {
-            encoderDrive(-TURN_SPEED, inches, 10);
+        switch (direction) {
+            case RIGHT :
+                encoderDrive(TURN_SPEED, inches, 10);
+                break;
+            case LEFT :
+                encoderDrive(-TURN_SPEED, inches, 10);
         }
     }
-
 }

@@ -16,16 +16,37 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_BLUE_ALLIANCE;
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_RED_ALLIANCE;
+
 public class HardwarePhynn {
 
-    //Vuforia
-    int cameraMonitorViewId;
-    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
-    VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
-    VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
-    VuforiaTrackable relicTemplate = relicTrackables.get(0);
-    OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
-    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+    public enum Alliance {
+        IS_BLUE_ALLIANCE, IS_RED_ALLIANCE
+}
+
+    public static Alliance alliance = Alliance.IS_BLUE_ALLIANCE;
+
+    public static final boolean IS_BLUE = (alliance == IS_BLUE_ALLIANCE);
+    public static final boolean IS_RED = (alliance == IS_RED_ALLIANCE);
+
+    //Encoder Variables
+    public static final double COUNTS_PER_MOTOR_REV = 374;
+    public static final double DRIVE_GEAR_REDUCTION = 2.0;
+    public static final double WHEEL_DIAMETER_INCHES = 4.0;
+    public static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                                 (WHEEL_DIAMETER_INCHES * 3.1415);
+    public static final double DRIVE_SPEED = 0.25;
+    public static final double TURN_SPEED = 0.4;
+    public static final String RIGHT = "RIGHT";
+    public static final String LEFT  = "LEFT";
+    public static final double ROBOT_SHORT_DIAMETER_IN = 16.35;
+    public static final double ROBOT_LONG_DIAMETER_IN = 17.4;
+    public final double shortSquared = Math.pow(0.5 * ROBOT_SHORT_DIAMETER_IN, 2.0);
+    public final double longSquared = Math.pow(0.5 * ROBOT_LONG_DIAMETER_IN, 2.0);
+    public final double sqRoot = Math.sqrt(2.0 * (shortSquared + longSquared));
+    public final double robotCircumference = (Math.PI * sqRoot);
+    public ElapsedTime runtime = new ElapsedTime();
 
     //Hardware
     public DcMotor motorRight = null;
@@ -37,28 +58,10 @@ public class HardwarePhynn {
     public ColorSensor ColorSensor = null;
     public BNO055IMU imu = null;
 
-
-    //Encoder Variables
-    public static final double     COUNTS_PER_MOTOR_REV    = 374 ;      // eg: ANDY MARK Motor Encoder
-    public static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
-    public static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference of the wheel
-    public static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                             (WHEEL_DIAMETER_INCHES * 3.1415);
-    public static final double     DRIVE_SPEED             = 0.25;
-    public static final double     TURN_SPEED              = 0.4;
-    public static final double     RIGHT                   = 1;
-    public static final double     LEFT                    = 0;
-    public static final double     ROBOT_SHORT_DIAMETER_IN = 16.35; // Used to find the circumference of the robots ellipse
-    public static final double     ROBOT_LONG_DIAMETER_IN  = 17.4;  // Used to find the circumference of the robots ellipse
-    public final double shortSquared = Math.pow(.5 * ROBOT_SHORT_DIAMETER_IN, 2);
-    public final double longSquared = Math.pow(.5 * ROBOT_LONG_DIAMETER_IN, 2);
-    public final double sqRoot = Math.sqrt(2 * (shortSquared + longSquared));
-    public final double robotCircumference = (Math.PI * sqRoot);
-
-    //Gyro PID Variable
-    public static final double     kP                       = 0;
-    public static final double     kI                       = 0;
-    public static final double     kD                       = 0;
+    //Gyro PID Variables
+    public static final double kP = 0.0;
+    public static final double kI = 0.0;
+    public static final double kD = 0.0;
 
     //Variables
     public boolean Claws_Open = true;
@@ -66,19 +69,25 @@ public class HardwarePhynn {
     public final boolean Red_Ball = ColorSensor.red() > ColorSensor.blue();
     public final boolean Blue_Ball = ColorSensor.blue() > ColorSensor.red();
 
-    public ElapsedTime runtime = new ElapsedTime();
-
     HardwareMap hwMap = null;
 
+    //Vuforia
+    int cameraMonitorViewId;
+    VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+    VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+    VuforiaTrackables relicTrackables = vuforia.loadTrackablesFromAsset("RelicVuMark");
+    VuforiaTrackable relicTemplate = relicTrackables.get(0);
+    OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+    RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
     public final boolean RRRight = (vuMark == RelicRecoveryVuMark.RIGHT);
     public final boolean RRLeft = (vuMark == RelicRecoveryVuMark.LEFT);
     public final boolean RRCenter = (vuMark == RelicRecoveryVuMark.CENTER);
 
-    public HardwarePhynn(){
+    public HardwarePhynn() {
 
     }
-    
-    public void init (HardwareMap ahwMap){
+
+    public void init(HardwareMap ahwMap) {
 
         hwMap = ahwMap;
 
@@ -93,7 +102,7 @@ public class HardwarePhynn {
         motorRight = hwMap.get(DcMotor.class, "right");
         motorLeft = hwMap.get(DcMotor.class, "left");
         Lift = hwMap.get(DcMotor.class, "lift");
-        
+
         motorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motorRight.setPower(0);
@@ -107,7 +116,7 @@ public class HardwarePhynn {
         servo1 = hwMap.get(Servo.class, "servo1");
         servo2 = hwMap.get(Servo.class, "servo2");
         servo3 = hwMap.get(Servo.class, "servo3");
-        
+
         servo2.setDirection(Servo.Direction.REVERSE);
 
         //ColorSensor
@@ -115,7 +124,6 @@ public class HardwarePhynn {
 
         //Gyro
         imu = hwMap.get(BNO055IMU.class, "imu");
-
 
 
     }
