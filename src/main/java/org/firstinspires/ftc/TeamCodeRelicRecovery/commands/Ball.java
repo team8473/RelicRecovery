@@ -2,7 +2,6 @@ package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.TeamCodeRelicRecovery.EncoderTemplate;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.RelicRecoveryDriving;
 
@@ -13,9 +12,9 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 public class Ball extends LinearOpMode {
 
     HardwarePhynn phynn = new HardwarePhynn();
-    EncoderTemplate encoders = new EncoderTemplate();
+    Encoders encoders = new Encoders();
     RelicRecoveryDriving drive = new RelicRecoveryDriving();
-    EncoderTemplate encoder = new EncoderTemplate();
+    Encoders encoder = new Encoders();
 
 
     @Override

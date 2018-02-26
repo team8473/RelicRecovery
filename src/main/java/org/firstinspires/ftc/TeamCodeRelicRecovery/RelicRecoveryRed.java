@@ -1,27 +1,29 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Ball;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Encoders;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.End;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Start;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.paths.RedCenter;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SPEED;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RED;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 
-@Autonomous(name="Red", group="Gabe")
+@Autonomous(name="Red_Turn", group="Gabe")
 //@Disabled
 public class RelicRecoveryRed extends LinearOpMode {
 
     private Start start = new Start();
     private End end = new End();
     private HardwarePhynn phynn = new HardwarePhynn();
-    private EncoderTemplate encoders = new EncoderTemplate();
+    private Encoders encoders = new Encoders();
     private Ball ball = new Ball();
 
 
@@ -30,6 +32,7 @@ public class RelicRecoveryRed extends LinearOpMode {
 
         phynn.init(hardwareMap);
 
+        RedCenter center = new RedCenter();
 
         waitForStart();
 
@@ -45,12 +48,11 @@ public class RelicRecoveryRed extends LinearOpMode {
                 if (phynn.RRCenter) {
                     start.Start();
                     if (phynn.Red_Ball) {
-                        ball.Red("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 35.5, 10);
-                        encoders.encoderTurn(90, RIGHT); //90 degree turn
+                        ball.Red(RED);
+                        center.buildPath();
                         end.End();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue("RED");
+                        ball.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 37, 10);
                         encoders.encoderTurn(90, RIGHT); //90 degree turn
                         end.End();
@@ -58,12 +60,12 @@ public class RelicRecoveryRed extends LinearOpMode {
                 }else if (phynn.RRRight) {
                     start.Start();
                     if (phynn.Red_Ball) {
-                        ball.Red("RED");
+                        ball.Red(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 27.5, 0);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
                         end.End();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue("RED");
+                        ball.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 28.5, 10);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
                         end.End();
@@ -71,12 +73,12 @@ public class RelicRecoveryRed extends LinearOpMode {
                 }else if (phynn.RRLeft) {
                     start.Start();
                     if (phynn.Red_Ball) {
-                        ball.Red("RED");
+                        ball.Red(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 43.5, 12);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
                         end.End();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue("RED");
+                        ball.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 46, 10);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
                         end.End();

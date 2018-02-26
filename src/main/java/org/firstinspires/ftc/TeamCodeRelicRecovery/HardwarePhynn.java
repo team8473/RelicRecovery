@@ -33,13 +33,15 @@ public class HardwarePhynn {
     //Encoder Variables
     public static final double COUNTS_PER_MOTOR_REV = 374;
     public static final double DRIVE_GEAR_REDUCTION = 2.0;
-    public static final double WHEEL_DIAMETER_INCHES = 4.0;
+    public static final double WHEEL_DIAMETER = 4.0;
     public static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                 (WHEEL_DIAMETER_INCHES * 3.1415);
+                                                 (WHEEL_DIAMETER * 3.1415);
     public static final double DRIVE_SPEED = 0.25;
     public static final double TURN_SPEED = 0.4;
     public static final String RIGHT = "RIGHT";
     public static final String LEFT  = "LEFT";
+    public static final String RED   = "RED";
+    public static final String BLUE  = "BLUE";
     public static final double ROBOT_SHORT_DIAMETER_IN = 16.35;
     public static final double ROBOT_LONG_DIAMETER_IN = 17.4;
     public final double shortSquared = Math.pow(0.5 * ROBOT_SHORT_DIAMETER_IN, 2.0);
