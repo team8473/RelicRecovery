@@ -1,18 +1,21 @@
-package org.firstinspires.ftc.TeamCodeRelicRecovery;
+package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
+
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.TURN_SPEED;
 
 
-@Autonomous(name="EncoderTemplate", group="Gabe")
+@Autonomous(name="Encoders", group="Gabe")
 @Disabled
-public class EncoderTemplate extends LinearOpMode {
+public class Encoders extends LinearOpMode {
 
     //Variables for Encoders
     private HardwarePhynn phynn = new HardwarePhynn();
@@ -24,7 +27,6 @@ public class EncoderTemplate extends LinearOpMode {
 
     }
 
-
     public void encoderDrive(double speed,
                              double distance,
                              double timeoutS) {
@@ -32,6 +34,7 @@ public class EncoderTemplate extends LinearOpMode {
 
         if (opModeIsActive()) {
             newTarget = phynn.motorLeft.getCurrentPosition() + (int)(distance * COUNTS_PER_INCH);
+
             if (speed == TURN_SPEED){
                 phynn.motorRight.setTargetPosition(newTarget);
                 phynn.motorLeft.setTargetPosition(-newTarget);
@@ -72,8 +75,7 @@ public class EncoderTemplate extends LinearOpMode {
 
     }
     public void encoderTurn(double turnAngle,
-                             String direction)
-    {
+                            String direction) {
         double circleFraction = turnAngle / 360;
         double inches = (circleFraction * phynn.robotCircumference);
 

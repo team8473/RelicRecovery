@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Ball;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Encoders;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.End;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Start;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -19,7 +20,7 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
 
     private HardwarePhynn   phynn       = new HardwarePhynn();
     private Ball ball        = new Ball();
-    private EncoderTemplate encoders    = new EncoderTemplate();
+    private Encoders encoders    = new Encoders();
     private Start start       = new Start();
     private End end         = new End();
 

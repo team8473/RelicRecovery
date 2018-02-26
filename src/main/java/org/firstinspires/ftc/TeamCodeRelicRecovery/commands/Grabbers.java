@@ -15,23 +15,18 @@ public class Grabbers extends LinearOpMode{
 
         }
         public void Half(){
-
         robot.servo1.setPosition(.45);
         robot.servo2.setPosition(.45);
         }
         public void Open(){
-
             robot.servo1.setPosition(.25);
             robot.servo2.setPosition(.25);
             robot.Claws_Open = true;
-
         }
         public void Close(){
-
             robot.servo1.setPosition(.65);
             robot.servo2.setPosition(.65);
             robot.Claws_Open = false;
-
         }
     }
 
