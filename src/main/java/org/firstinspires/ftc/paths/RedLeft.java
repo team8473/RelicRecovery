@@ -11,7 +11,7 @@ public class RedLeft implements PathContainer {
     
     @Override
     public Path buildPath() {
-        ArrayList<Waypoint> sWaypoints = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> sWaypoints = new ArrayList<>();
         sWaypoints.add(new Waypoint(24,49,0,0));
         sWaypoints.add(new Waypoint(24,75,0,0.5));
         sWaypoints.add(new Waypoint(10,75,0,0.5));
