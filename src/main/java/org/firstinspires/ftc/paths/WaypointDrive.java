@@ -8,16 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.TURN_SPEED;
 
 
 @Autonomous(name="Encoders", group="Gabe")
 @Disabled
 public class WaypointDrive extends LinearOpMode {
 
-    //Variables for Encoders
     private HardwarePhynn phynn = new HardwarePhynn();
 
     @Override
@@ -27,10 +23,8 @@ public class WaypointDrive extends LinearOpMode {
 
     }
 
-
-    public void drive(double leftSpeed, double rightSpeed,
-                             double leftDistance, double rightDistance,
-                             double timeoutS) {
+    void drive(double leftSpeed, double rightSpeed,
+                             double leftDistance, double rightDistance) {
         int newLeftTarget;
         int newRightTarget;
 
@@ -49,7 +43,6 @@ public class WaypointDrive extends LinearOpMode {
             phynn.motorLeft.setPower(Math.abs(leftSpeed));
 
             while (opModeIsActive() &&
-                    (phynn.runtime.seconds() < timeoutS) &&
                     (phynn.motorRight.isBusy() && phynn.motorLeft.isBusy())) {
 
                 telemetry.addData("Motor1", phynn.motorRight.getCurrentPosition());

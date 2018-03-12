@@ -9,16 +9,12 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
 
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_BLUE_ALLIANCE;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_RED_ALLIANCE;
-
 @TeleOp(name = "RelicRecovery", group = "Gabe")
 
 public class RelicRecoveryDriving extends LinearOpMode {
 
     //Importing all outside programs used
     private HardwarePhynn phynn      = new HardwarePhynn();
-    private Ball          ball       = new Ball();
     private Grabbers      grabbers   = new Grabbers();
     private Drive         drive      = new Drive();
     private Drive         fast       = new Drive();

@@ -6,12 +6,12 @@ import org.firstinspires.ftc.math.RigidTransform2d;
 import org.firstinspires.ftc.math.Rotation2d;
 import org.firstinspires.ftc.math.Translation2d;
 
-public class PathBuilder {
+class PathBuilder {
 
     private static final double kEpsilon = 1E-9;
     private static final double kReallyBigNumber = 1E9;
 
-    public static Path buildPathFromWaypoints(List<Waypoint> w) {
+    static Path buildPathFromWaypoints(List<Waypoint> w) {
         Path p = new Path();
         if (w.size() < 2)
             throw new Error("Path must contain at least 2 waypoints");
@@ -22,8 +22,9 @@ public class PathBuilder {
                 i++;
             } while (i < w.size() - 2);
         }
-        new Line(w.get(w.size() - 2), w.get(w.size() - 1)).addToPath(p);
-
+        else if (w.size() == 2) {
+            new Line(w.get(w.size() - 2), w.get(w.size() - 1)).addToPath(p);
+        }
         return p;
     }
 
@@ -50,7 +51,7 @@ public class PathBuilder {
             this(other.position.x(), other.position.y(), other.radius, other.speed, other.marker);
         }
 
-        public Waypoint(double x, double y, double r, double s) {
+        Waypoint(double x, double y, double r, double s) {
             position = new Translation2d(x, y);
             radius = r;
             speed = s;
@@ -62,7 +63,7 @@ public class PathBuilder {
             speed = s;
         }
 
-        public Waypoint(double x, double y, double r, double s, String m) {
+        Waypoint(double x, double y, double r, double s, String m) {
             position = new Translation2d(x, y);
             radius = r;
             speed = s;
@@ -81,7 +82,7 @@ public class PathBuilder {
         Translation2d slope;
         double speed;
 
-        public Line(Waypoint a, Waypoint b) {
+        Line(Waypoint a, Waypoint b) {
             this.a = a;
             this.b = b;
             slope = new Translation2d(a.position, b.position);
@@ -108,11 +109,11 @@ public class PathBuilder {
         double radius;
         double speed;
 
-        public Arc(Waypoint a, Waypoint b, Waypoint c) {
+        Arc(Waypoint a, Waypoint b, Waypoint c) {
             this(new Line(a, b), new Line(b, c), b.position);
         }
 
-        public Arc(Line a, Line b, Translation2d center) {
+        Arc(Line a, Line b, Translation2d center) {
             this.a = a;
             this.b = b;
             this.speed = (a.speed + b.speed) / 2;

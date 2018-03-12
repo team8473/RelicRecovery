@@ -78,7 +78,7 @@ public class GyroTest extends LinearOpMode
         waitForStart();
 
 
-        // Start the logging of measured acceleration
+        // startUp the logging of measured acceleration
         phynn.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
     }

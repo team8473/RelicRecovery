@@ -24,7 +24,7 @@ public class RelicRecoveryRed extends LinearOpMode {
     private End end = new End();
     private HardwarePhynn phynn = new HardwarePhynn();
     private Encoders encoders = new Encoders();
-    private Ball ball = new Ball();
+    private Ball balls = new Ball();
 
 
     @Override
@@ -46,42 +46,42 @@ public class RelicRecoveryRed extends LinearOpMode {
         while (opModeIsActive()) {
             if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 if (phynn.RRCenter) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
-                        ball.Red(RED);
+                        balls.Red(RED);
                         center.buildPath();
-                        end.End();
+                        end.Finish();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue(RED);
+                        balls.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 37, 10);
                         encoders.encoderTurn(90, RIGHT); //90 degree turn
-                        end.End();
+                        end.Finish();
                     }
                 }else if (phynn.RRRight) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
-                        ball.Red(RED);
+                        balls.Red(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 27.5, 0);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
-                        end.End();
+                        end.Finish();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue(RED);
+                        balls.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 28.5, 10);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
-                        end.End();
+                        end.Finish();
                     }
                 }else if (phynn.RRLeft) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
-                        ball.Red(RED);
+                        balls.Red(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 43.5, 12);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
-                        end.End();
+                        end.Finish();
                     }else if (phynn.Blue_Ball) {
-                        ball.Blue(RED);
+                        balls.Blue(RED);
                         encoders.encoderDrive(DRIVE_SPEED, 46, 10);
                         encoders.encoderTurn(90, LEFT); //90 degree turn
-                        end.End();
+                        end.Finish();
                     }
                 }
             }

@@ -8,15 +8,15 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SP
 
 public class End extends LinearOpMode {
 
-    Encoders encoders = new Encoders();
-    Grabbers grabbers = new Grabbers();
-    HardwarePhynn phynn = new HardwarePhynn();
+    private Encoders encoders = new Encoders();
+    private Grabbers grabbers = new Grabbers();
+    private HardwarePhynn phynn = new HardwarePhynn();
 
     public void runOpMode() throws InterruptedException{
 
     }
 
-    public void End() {
+    public void Finish() {
         encoders.encoderDrive(DRIVE_SPEED,8.5, 10);
         grabbers.Open();
         sleep(500);
