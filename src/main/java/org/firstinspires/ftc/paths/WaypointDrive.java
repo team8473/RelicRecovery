@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
@@ -20,7 +19,6 @@ public class WaypointDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         phynn.init(hardwareMap);
-
     }
 
     void drive(double leftSpeed, double rightSpeed,

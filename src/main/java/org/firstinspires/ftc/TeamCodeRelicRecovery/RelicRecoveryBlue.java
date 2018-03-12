@@ -13,7 +13,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SPEED;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 
-
 @Autonomous(name="Blue", group="Gabe")
 //@Disabled
 public class RelicRecoveryBlue extends LinearOpMode {

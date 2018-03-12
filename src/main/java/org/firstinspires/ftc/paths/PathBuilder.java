@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.paths;
 
 import java.util.List;
-
 import org.firstinspires.ftc.math.RigidTransform2d;
 import org.firstinspires.ftc.math.Rotation2d;
 import org.firstinspires.ftc.math.Translation2d;

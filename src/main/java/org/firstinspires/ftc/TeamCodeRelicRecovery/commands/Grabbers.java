@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
-
 public class Grabbers extends LinearOpMode{
 
     private HardwarePhynn robot = new HardwarePhynn();

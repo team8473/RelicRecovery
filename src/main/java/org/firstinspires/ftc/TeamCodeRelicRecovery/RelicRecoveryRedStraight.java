@@ -85,7 +85,7 @@ public class RelicRecoveryRedStraight extends LinearOpMode {
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 21.5, 10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.Finish();
+                        end.Finish(); 
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 26,15);

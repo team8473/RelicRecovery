@@ -17,7 +17,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Ball.IS_BLUE_BALL;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Ball.IS_RED_BALL;
 
-
 public class HardwarePhynn {
 
     public enum Ball {

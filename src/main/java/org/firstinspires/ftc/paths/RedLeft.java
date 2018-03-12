@@ -1,7 +1,6 @@
 ﻿package org.firstinspires.ftc.paths;
 
 import java.util.ArrayList;
-
 import org.firstinspires.ftc.paths.PathBuilder.Waypoint;
 import org.firstinspires.ftc.math.RigidTransform2d;
 import org.firstinspires.ftc.math.Rotation2d;
@@ -18,7 +17,7 @@ public class RedLeft implements PathContainer {
 
         return PathBuilder.buildPathFromWaypoints(sWaypoints);
     }
-    
+
     @Override
     public RigidTransform2d getStartPose() {
         return new RigidTransform2d(new Translation2d(24, 49), Rotation2d.fromDegrees(180.0)); 
