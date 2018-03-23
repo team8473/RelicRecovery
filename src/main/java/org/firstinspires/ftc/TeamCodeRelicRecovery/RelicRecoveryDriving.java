@@ -4,13 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Ball;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
-
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_BLUE_ALLIANCE;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Alliance.IS_RED_ALLIANCE;
 
 @TeleOp(name = "RelicRecovery", group = "Gabe")
 
@@ -18,10 +14,8 @@ public class RelicRecoveryDriving extends LinearOpMode {
 
     //Importing all outside programs used
     private HardwarePhynn phynn      = new HardwarePhynn();
-    private Ball          ball       = new Ball();
     private Grabbers      grabbers   = new Grabbers();
     private Drive         drive      = new Drive();
-    private Drive         fast       = new Drive();
     private Lift          lift       = new Lift();
 
     @Override
@@ -37,15 +31,10 @@ public class RelicRecoveryDriving extends LinearOpMode {
 
         while (opModeIsActive()){
 
-            //Telemetry
-            telemetry.addData("RightEncoder : ", phynn.motorRight.getCurrentPosition());
-            telemetry.addData("LeftEncoder : ", phynn.motorLeft.getCurrentPosition());
-            telemetry.update();
-
-            //lift
+            //Lift
             lift.lift();
 
-            //Color sensor arm
+            //Color Sensor Arm
             phynn.servo3.setPosition(0.85);
 
             //Grabbers
@@ -66,7 +55,7 @@ public class RelicRecoveryDriving extends LinearOpMode {
                 drive.slowDrive();
             }
             else if(gamepad1.left_bumper && !gamepad2.right_bumper) {
-                fast.fastDrive();
+                drive.fastDrive();
             }
             else if(gamepad2.right_bumper) {
                 drive.stopDrive();

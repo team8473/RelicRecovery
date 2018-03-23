@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
-
 public class Lift extends LinearOpMode {
 
     private HardwarePhynn phynn = new HardwarePhynn();

@@ -40,59 +40,59 @@ public class RelicRecoveryRedStraight extends LinearOpMode {
         while (opModeIsActive()) {
             if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 if (phynn.RRRight) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 6,10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish();
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 26,10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 7, 10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish();
 
                     }
 
                 }else if (phynn.RRCenter) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 15, 10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish();
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 26,10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 15,10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish();
 
                     }
 
                 }else if (phynn.RRLeft) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 21.5, 10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish(); 
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("RED");
                         encoders.encoderDrive(DRIVE_SPEED, 26,15);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 23.5,0);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
+                        end.Finish();
 
                     }
                 }

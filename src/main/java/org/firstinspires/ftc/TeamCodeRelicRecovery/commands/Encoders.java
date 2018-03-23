@@ -12,7 +12,6 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.TURN_SPEED;
 
-
 @Autonomous(name="Encoders", group="Gabe")
 @Disabled
 public class Encoders extends LinearOpMode {

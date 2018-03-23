@@ -1,18 +1,17 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 public class Start extends LinearOpMode {
 
-    HardwarePhynn phynn = new HardwarePhynn();
-    Grabbers grabbers = new Grabbers();
+    private HardwarePhynn phynn = new HardwarePhynn();
+    private Grabbers grabbers = new Grabbers();
 
     public void runOpMode() throws InterruptedException{
     }
 
-    public void Start(){
+    public void startUp(){
         grabbers.Close();
         phynn.Lift.setPower(.4);
         sleep(1000);

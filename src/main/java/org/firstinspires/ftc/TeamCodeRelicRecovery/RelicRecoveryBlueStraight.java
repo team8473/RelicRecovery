@@ -3,7 +3,6 @@ package org.firstinspires.ftc.TeamCodeRelicRecovery;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Ball;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Encoders;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.End;
@@ -18,11 +17,11 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 //@Disabled
 public class RelicRecoveryBlueStraight extends LinearOpMode {
 
-    private HardwarePhynn   phynn       = new HardwarePhynn();
-    private Ball ball        = new Ball();
-    private Encoders encoders    = new Encoders();
-    private Start start       = new Start();
-    private End end         = new End();
+    private HardwarePhynn    phynn       = new HardwarePhynn();
+    private Encoders         encoders    = new Encoders();
+    private Start            start       = new Start();
+    private Ball             ball        = new Ball();
+    private End              end         = new End();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -41,59 +40,55 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
         while (opModeIsActive()) {
             if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 if (phynn.RRRight) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -17.5, 15);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 19, 10);
                         encoders.encoderTurn(90, LEFT);
-                        end.End();
+                        end.Finish();
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -21, 10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 22, 10);
                         encoders.encoderTurn(90, LEFT);
-                        end.End();
-
+                        end.Finish();
                     }
-
                 }else if (phynn.RRCenter) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -17.5, 10);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 13,10);
                         encoders.encoderTurn(90, LEFT);
-                        end.End();
+                        end.Finish();
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -21, 10);
                         encoders.encoderTurn(90, RIGHT);
                         encoders.encoderDrive(DRIVE_SPEED, 14, 10);
                         encoders.encoderTurn(90, RIGHT);
-                        end.End();
-
+                        end.Finish();
                     }
-
                 }else if (phynn.RRLeft) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -17.5, 15);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 6, 10);
                         encoders.encoderTurn(90, LEFT);
-                        end.End();
+                        end.Finish();
                     } else if (phynn.Blue_Ball) {
                         ball.Blue("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -21, 15);
                         encoders.encoderTurn(90, LEFT);
                         encoders.encoderDrive(DRIVE_SPEED, 7.5, 10);
                         encoders.encoderTurn(90, LEFT);
-                        end.End();
+                        end.Finish();
                     }
                 }
             }

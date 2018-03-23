@@ -13,14 +13,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SPEED;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 
-
 @Autonomous(name="Blue", group="Gabe")
 //@Disabled
 public class RelicRecoveryBlue extends LinearOpMode {
     
     private HardwarePhynn   phynn       = new HardwarePhynn();
     private Ball            ball        = new Ball();
-    private Encoders encoders    = new Encoders();
+    private Encoders        encoders    = new Encoders();
     private Start           start       = new Start();
     private End             end         = new End();
 
@@ -38,46 +37,45 @@ public class RelicRecoveryBlue extends LinearOpMode {
         phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         while (opModeIsActive()) {
-
             if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 if (phynn.RRRight) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -33.5, 10);
                         encoders.encoderTurn(45, LEFT);
-                        end.End();
+                        end.Finish();
                     }else if (phynn.Blue_Ball){
                         ball.Blue("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -38, 10);
                         encoders.encoderTurn(45, LEFT);
-                        end.End();
+                        end.Finish();
                     }
                 }else if (phynn.RRCenter) {
-                    start.Start();
+                    start.startUp();
                     if (phynn.Red_Ball) {
                         ball.Red("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -26, 10);
                         encoders.encoderTurn(45, LEFT);
-                        end.End();
+                        end.Finish();
                     }else if (phynn.Blue_Ball){
                         ball.Blue("BLUE");
                         encoders.encoderDrive(DRIVE_SPEED, -30.5, 10);
                         encoders.encoderTurn(45, LEFT);
-                        end.End();
+                        end.Finish();
                     }
                 }else if (phynn.RRLeft) {
-                    start.Start();
+                    start.startUp();
                         if (phynn.Red_Ball) {
                             ball.Red("BLUE");
                             encoders.encoderDrive(DRIVE_SPEED,-18, 10);
                             encoders.encoderTurn(45, LEFT);
-                            end.End();
+                            end.Finish();
                         }else if (phynn.Blue_Ball){
                             ball.Blue("BLUE");
                             encoders.encoderDrive(DRIVE_SPEED,-22.5, 10);
                             encoders.encoderTurn(45, LEFT);
-                            end.End();
+                            end.Finish();
                         }
                     }
                 }
