@@ -19,7 +19,7 @@ public class RelicRecoveryBlue extends LinearOpMode {
     
     private HardwarePhynn   phynn       = new HardwarePhynn();
     private Ball            ball        = new Ball();
-    private Encoders encoders    = new Encoders();
+    private Encoders        encoders    = new Encoders();
     private Start           start       = new Start();
     private End             end         = new End();
 
@@ -37,7 +37,6 @@ public class RelicRecoveryBlue extends LinearOpMode {
         phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         while (opModeIsActive()) {
-
             if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
                 if (phynn.RRRight) {
                     start.startUp();

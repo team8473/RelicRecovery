@@ -14,19 +14,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Ball.IS_BLUE_BALL;
-import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.Ball.IS_RED_BALL;
-
 public class HardwarePhynn {
 
     public enum Ball {
         IS_RED_BALL, IS_BLUE_BALL
     }
     public static Ball ball;
-
-    public static final boolean BLUE_BALL = (ball == IS_BLUE_BALL);
-    public static final boolean RED_BALL = (ball == IS_RED_BALL);
-
 
     //Encoder Variables
     private static final double COUNTS_PER_MOTOR_REV = 374;
@@ -124,7 +117,6 @@ public class HardwarePhynn {
 
         //Gyro
         imu = hwMap.get(BNO055IMU.class, "imu");
-
 
     }
 }

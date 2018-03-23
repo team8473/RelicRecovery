@@ -17,11 +17,11 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 //@Disabled
 public class RelicRecoveryBlueStraight extends LinearOpMode {
 
-    private HardwarePhynn   phynn       = new HardwarePhynn();
-    private Ball ball        = new Ball();
-    private Encoders encoders    = new Encoders();
-    private Start start       = new Start();
-    private End end         = new End();
+    private HardwarePhynn    phynn       = new HardwarePhynn();
+    private Encoders         encoders    = new Encoders();
+    private Start            start       = new Start();
+    private Ball             ball        = new Ball();
+    private End              end         = new End();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -55,9 +55,7 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
                         encoders.encoderDrive(DRIVE_SPEED, 22, 10);
                         encoders.encoderTurn(90, LEFT);
                         end.Finish();
-
                     }
-
                 }else if (phynn.RRCenter) {
                     start.startUp();
                     if (phynn.Red_Ball) {
@@ -74,9 +72,7 @@ public class RelicRecoveryBlueStraight extends LinearOpMode {
                         encoders.encoderDrive(DRIVE_SPEED, 14, 10);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-
                     }
-
                 }else if (phynn.RRLeft) {
                     start.startUp();
                     if (phynn.Red_Ball) {

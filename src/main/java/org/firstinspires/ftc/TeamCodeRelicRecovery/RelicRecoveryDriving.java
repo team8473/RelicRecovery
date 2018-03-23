@@ -16,7 +16,6 @@ public class RelicRecoveryDriving extends LinearOpMode {
     private HardwarePhynn phynn      = new HardwarePhynn();
     private Grabbers      grabbers   = new Grabbers();
     private Drive         drive      = new Drive();
-    private Drive         fast       = new Drive();
     private Lift          lift       = new Lift();
 
     @Override
@@ -32,15 +31,10 @@ public class RelicRecoveryDriving extends LinearOpMode {
 
         while (opModeIsActive()){
 
-            //Telemetry
-            telemetry.addData("RightEncoder : ", phynn.motorRight.getCurrentPosition());
-            telemetry.addData("LeftEncoder : ", phynn.motorLeft.getCurrentPosition());
-            telemetry.update();
-
-            //lift
+            //Lift
             lift.lift();
 
-            //Color sensor arm
+            //Color Sensor Arm
             phynn.servo3.setPosition(0.85);
 
             //Grabbers
@@ -61,7 +55,7 @@ public class RelicRecoveryDriving extends LinearOpMode {
                 drive.slowDrive();
             }
             else if(gamepad1.left_bumper && !gamepad2.right_bumper) {
-                fast.fastDrive();
+                drive.fastDrive();
             }
             else if(gamepad2.right_bumper) {
                 drive.stopDrive();
