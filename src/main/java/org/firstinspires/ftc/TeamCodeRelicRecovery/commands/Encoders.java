@@ -75,6 +75,7 @@ public class Encoders extends LinearOpMode {
     }
     public void encoderTurn(double turnAngle,
                             String direction) {
+
         double circleFraction = turnAngle / 360;
         double inches = (circleFraction * phynn.robotCircumference);
 
@@ -84,6 +85,7 @@ public class Encoders extends LinearOpMode {
                 break;
             case LEFT :
                 encoderDrive(-TURN_SPEED, inches, 10);
+                break;
         }
     }
 }

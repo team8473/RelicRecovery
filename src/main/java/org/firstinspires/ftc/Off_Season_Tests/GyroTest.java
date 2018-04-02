@@ -47,8 +47,7 @@ import java.util.Locale;
 
 @Autonomous(name = "Sensor: BNO055 IMU", group = "Sensor")
 @Disabled
-public class GyroTest extends LinearOpMode
-{
+public class GyroTest extends LinearOpMode {
 
     private HardwarePhynn phynn = new HardwarePhynn();
     private ElapsedTime runtime = new ElapsedTime();
