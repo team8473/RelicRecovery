@@ -1,68 +1,82 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
 
 @TeleOp(name = "RelicRecovery", group = "Gabe")
+//@Disabled
+public class RelicRecoveryDriving extends OpMode{
 
-public class RelicRecoveryDriving extends LinearOpMode {
+    private HardwarePhynn phynn    = new HardwarePhynn();
+    private ElapsedTime timer    = new ElapsedTime();
+    private Grabbers claw      = new Grabbers();
+    private Drive drive      = new Drive();
+    private Lift lift      = new Lift();
 
-    //Importing all outside programs used
-    private HardwarePhynn phynn      = new HardwarePhynn();
-    private Grabbers      grabbers   = new Grabbers();
-    private Drive         drive      = new Drive();
-    private Lift          lift       = new Lift();
 
     @Override
-    public void runOpMode() throws InterruptedException{
-
-        //Hardware
+    public void init() {
         phynn.init(hardwareMap);
 
         phynn.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         phynn.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        waitForStart();
+        phynn.servo3.setPosition(0.85);
+    }
 
-        while (opModeIsActive()){
+    @Override
+    public void init_loop() {
+    }
 
-            //Lift
-            lift.lift();
+    @Override
+    public void start() {
+        timer.reset();
+    }
 
-            //Color Sensor Arm
-            phynn.servo3.setPosition(0.85);
+    @Override
+    public void loop() {
+        //Lift
+        lift.lift();
 
-            //Grabbers
-            if (gamepad2.a && phynn.Claws_Open) {
-                grabbers.Close();
-                sleep(250);
-            }
-            if (gamepad2.a && !phynn.Claws_Open) {
-                grabbers.Open();
-                sleep(250);
-            }
-            if (gamepad2.b) {
-               grabbers.Half();
-            }
-
-            //Driving
-            if (gamepad1.right_bumper && !gamepad2.right_bumper) {
-                drive.slowDrive();
-            }
-            else if(gamepad1.left_bumper && !gamepad2.right_bumper) {
-                drive.fastDrive();
-            }
-            else if(gamepad2.right_bumper) {
-                drive.stopDrive();
-            }
-            else if (!gamepad1.right_bumper && !gamepad2.right_bumper) {
-                drive.drive();
+        //Grabbing
+        if (gamepad2.a && phynn.Claws_Open) {
+            claw.Close();
+            timer.reset();
+            while(timer.milliseconds() <= 250){
+                telemetry.addData("Wait", timer.milliseconds());
             }
         }
+        if (gamepad2.a && !phynn.Claws_Open) {
+            claw.Open();
+            timer.reset();
+            while(timer.milliseconds() <= 250){
+                telemetry.addData("Wait", timer.milliseconds());
+            }
+        }
+        if (gamepad2.b) {
+            claw.Half();
+        }
+
+        //Driving
+        if (gamepad1.right_bumper && !gamepad2.right_bumper) {
+            drive.slowDrive();
+        } else if(gamepad1.left_bumper && !gamepad2.right_bumper) {
+            drive.fastDrive();
+        } else if(gamepad2.right_bumper) {
+            drive.stopDrive();
+        } else {
+            drive.drive();
+        }
+    }
+
+    @Override
+    public void stop() {
+        claw.Open();
     }
 }

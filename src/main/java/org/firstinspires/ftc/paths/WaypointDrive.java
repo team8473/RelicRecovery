@@ -22,7 +22,8 @@ public class WaypointDrive extends LinearOpMode {
     }
 
     void drive(double leftSpeed, double rightSpeed,
-                             double leftDistance, double rightDistance) {
+               double leftDistance, double rightDistance) {
+
         int newLeftTarget;
         int newRightTarget;
 

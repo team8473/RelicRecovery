@@ -18,10 +18,10 @@ class Path {
 
         double innerScale = innerScale(radius);
 
-        leftDistance = (distance * Math.abs(innerScale));
-        leftSpeed = (speed * innerScale);
+        leftDistance =  (distance * Math.abs(innerScale));
+        leftSpeed =     (speed * innerScale);
         rightDistance = (distance);
-        rightSpeed = (speed);
+        rightSpeed =    (speed);
 
         waypoint.drive(leftSpeed, rightSpeed, leftDistance, rightDistance);
     }
