@@ -5,12 +5,12 @@ import org.firstinspires.ftc.math.RigidTransform2d;
 import org.firstinspires.ftc.math.Rotation2d;
 import org.firstinspires.ftc.math.Translation2d;
 
-class PathBuilder {
+public class PathBuilder {
 
     private static final double kEpsilon = 1E-9;
     private static final double kReallyBigNumber = 1E9;
 
-    static Path buildPathFromWaypoints(List<Waypoint> w) {
+    public static Path buildPathFromWaypoints(List<Waypoint> w) {
         Path p = new Path();
         if (w.size() < 2)
             throw new Error("Path must contain at least 2 waypoints");
@@ -50,7 +50,7 @@ class PathBuilder {
             this(other.position.x(), other.position.y(), other.radius, other.speed, other.marker);
         }
 
-        Waypoint(double x, double y, double r, double s) {
+        public Waypoint(double x, double y, double r, double s) {
             position = new Translation2d(x, y);
             radius = r;
             speed = s;

@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
@@ -14,6 +16,7 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_P
 public class WaypointDrive extends LinearOpMode {
 
     private HardwarePhynn phynn = new HardwarePhynn();
+    private ElapsedTime timer = new ElapsedTime();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -37,7 +40,7 @@ public class WaypointDrive extends LinearOpMode {
             phynn.motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             phynn.motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            phynn.runtime.reset();
+            timer.reset();
             phynn.motorRight.setPower(Math.abs(rightSpeed));
             phynn.motorLeft.setPower(Math.abs(leftSpeed));
 

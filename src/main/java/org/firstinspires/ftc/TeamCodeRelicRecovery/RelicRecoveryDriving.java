@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Wait;
 
-@TeleOp(name = "RelicRecovery", group = "Gabe")
-//@Disabled
+@TeleOp(name = "RelicRecovery", group = "Tank")
 public class RelicRecoveryDriving extends OpMode{
 
     private HardwarePhynn phynn    = new HardwarePhynn();
@@ -18,7 +18,7 @@ public class RelicRecoveryDriving extends OpMode{
     private Grabbers claw      = new Grabbers();
     private Drive drive      = new Drive();
     private Lift lift      = new Lift();
-
+    private Wait wait    = new Wait();
 
     @Override
     public void init() {
@@ -27,7 +27,7 @@ public class RelicRecoveryDriving extends OpMode{
         phynn.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         phynn.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        phynn.servo3.setPosition(0.85);
+        phynn.armServo.setPosition(0.85);
     }
 
     @Override
@@ -41,23 +41,17 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void loop() {
-        //Lift
+        //Lifting
         lift.lift();
 
         //Grabbing
-        if (gamepad2.a && phynn.Claws_Open) {
+        if (gamepad2.a && phynn.clawsOpen) {
             claw.Close();
-            timer.reset();
-            while(timer.milliseconds() <= 250){
-                telemetry.addData("Wait", timer.milliseconds());
-            }
+            wait.waitMilliseconds(250);
         }
-        if (gamepad2.a && !phynn.Claws_Open) {
+        if (gamepad2.a && !phynn.clawsOpen) {
             claw.Open();
-            timer.reset();
-            while(timer.milliseconds() <= 250){
-                telemetry.addData("Wait", timer.milliseconds());
-            }
+            wait.waitMilliseconds(250);
         }
         if (gamepad2.b) {
             claw.Half();

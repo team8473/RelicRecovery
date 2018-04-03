@@ -2,7 +2,7 @@ package org.firstinspires.ftc.paths;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.ball;
 
-class Path {
+public class Path {
 
     private static final double ROBOT_WIDTH = 17.2;
 

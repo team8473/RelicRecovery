@@ -1,20 +1,23 @@
-﻿package org.firstinspires.ftc.paths;
+﻿package org.firstinspires.ftc.TeamCodeRelicRecovery.paths;
 
 import java.util.ArrayList;
 
+import org.firstinspires.ftc.paths.Path;
+import org.firstinspires.ftc.paths.PathBuilder;
 import org.firstinspires.ftc.paths.PathBuilder.Waypoint;
 import org.firstinspires.ftc.math.RigidTransform2d;
 import org.firstinspires.ftc.math.Rotation2d;
 import org.firstinspires.ftc.math.Translation2d;
+import org.firstinspires.ftc.paths.PathContainer;
 
-public class RedCenter implements PathContainer {
-
+public class RedLeft implements PathContainer {
+    
     @Override
     public Path buildPath() {
         ArrayList<Waypoint> sWaypoints = new ArrayList<>();
         sWaypoints.add(new Waypoint(24,49,0,0));
-        sWaypoints.add(new Waypoint(24,85,0,12));
-        sWaypoints.add(new Waypoint(10,85,0,12));
+        sWaypoints.add(new Waypoint(24,75,0,0.5));
+        sWaypoints.add(new Waypoint(10,75,0,0.5));
 
         return PathBuilder.buildPathFromWaypoints(sWaypoints);
     }
@@ -28,7 +31,7 @@ public class RedCenter implements PathContainer {
     public boolean isReversed() {
         return false; 
     }
-	// WAYPOINT_DATA: [{"position":{"x":24,"y":49},"speed":0,"radius":0,"comment":""},{"position":{"x":24,"y":85},"speed":0,"radius":0,"comment":""},{"position":{"x":10,"y":85},"speed":0,"radius":0,"comment":""}]
+	// WAYPOINT_DATA: [{"position":{"x":24,"y":49},"speed":0,"radius":0,"comment":""},{"position":{"x":24,"y":75},"speed":0,"radius":0,"comment":""},{"position":{"x":10,"y":75},"speed":60,"radius":0,"comment":""}]
 	// IS_REVERSED: false
-	// FILE_NAME: RedCenter
+	// FILE_NAME: RedLeft
 }
