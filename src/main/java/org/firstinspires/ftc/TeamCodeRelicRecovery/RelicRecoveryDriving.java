@@ -10,6 +10,9 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Wait;
 
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DOWN;
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.UP;
+
 @TeleOp(name = "RelicRecovery", group = "Tank")
 public class RelicRecoveryDriving extends OpMode{
 
@@ -18,7 +21,6 @@ public class RelicRecoveryDriving extends OpMode{
     private Grabbers claw      = new Grabbers();
     private Drive drive      = new Drive();
     private Lift lift      = new Lift();
-    private Wait wait    = new Wait();
 
     @Override
     public void init() {
@@ -44,14 +46,15 @@ public class RelicRecoveryDriving extends OpMode{
         //Lifting
         lift.lift();
 
-        //Grabbing
-        if (gamepad2.a && phynn.clawsOpen) {
-            claw.Close();
-            wait.waitMilliseconds(250);
+        if(gamepad2.dpad_up) {
+            lift.cycleLift(UP);
+        } else if(gamepad2.dpad_down) {
+            lift.cycleLift(DOWN);
         }
-        if (gamepad2.a && !phynn.clawsOpen) {
-            claw.Open();
-            wait.waitMilliseconds(250);
+
+        //Grabbing
+        if (gamepad2.a) {
+            claw.cyclePosition();
         }
         if (gamepad2.b) {
             claw.Half();
@@ -71,6 +74,5 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void stop() {
-        claw.Open();
     }
 }

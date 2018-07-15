@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.math;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import java.util.List;
 
 /**
  * Contains basic functions that are used often.
  */
+@Disabled
 public class Util {
     /** Prevent this class from being instantiated. */
     private Util() {

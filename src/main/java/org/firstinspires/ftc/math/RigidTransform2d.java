@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.math;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import static org.firstinspires.ftc.math.Util.epsilonEquals;
 
 /**
@@ -7,6 +9,7 @@ import static org.firstinspires.ftc.math.Util.epsilonEquals;
  *
  * Inspired by Sophus (https://github.com/strasdat/Sophus/tree/master/sophus)
  */
+@Disabled
 public class RigidTransform2d {
     protected static final double kEpsilon = 1E-9;
 

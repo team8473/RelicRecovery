@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 /**
  * The start of every autonomous mode
  */
+@Disabled
 public class Start extends LinearOpMode {
 
     private HardwarePhynn phynn = new HardwarePhynn();

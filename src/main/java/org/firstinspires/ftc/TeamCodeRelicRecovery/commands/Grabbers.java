@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
@@ -11,54 +12,57 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.GRABBERS
 /**
  * Movements for the grabbers
  */
+@Disabled
 public class Grabbers extends LinearOpMode{
 
-    private HardwarePhynn robot = new HardwarePhynn();
+    private HardwarePhynn phynn = new HardwarePhynn();
+
+    private int x = 0;
+    private int currentPosition = 0;
+
+    public static Position[] position = new Position[]{Position.GRABBERS_OPEN, Position.GRABBERS_CLOSE};
 
     @Override
     public void runOpMode(){
-        robot.init(hardwareMap);
+        phynn.init(hardwareMap);
     }
 
     public void Half(){
-        telemetry.addData("Initialized", null);
-        telemetry.update();
-        robot.rightGrabber.setPosition(GRABBERS_HALF);
-        robot.leftGrabber.setPosition(GRABBERS_HALF);
-        telemetry.addData("End", null);
-        telemetry.update();
-        if(robot.rightGrabber.getPosition() != GRABBERS_HALF || robot.leftGrabber.getPosition() != GRABBERS_HALF) {
-            telemetry.addData("Interrupted", null);
-            telemetry.update();
+        phynn.rightGrabber.setPosition(GRABBERS_HALF);
+        phynn.leftGrabber.setPosition(GRABBERS_HALF);
+    }
+
+    private void setPosition(Position position) {
+        switch (position) {
+            case GRABBERS_OPEN:
+                phynn.rightGrabber.setPosition(GRABBERS_OPEN);
+                phynn.leftGrabber.setPosition(GRABBERS_OPEN);
+                break;
+            case GRABBERS_CLOSE:
+                phynn.rightGrabber.setPosition(GRABBERS_CLOSED);
+                phynn.leftGrabber.setPosition(GRABBERS_CLOSED);
+                break;
+            default:
+                break;
         }
     }
 
-    public void Open(){
-        telemetry.addData("Initialized", null);
-        telemetry.update();
-        robot.rightGrabber.setPosition(GRABBERS_OPEN);
-        robot.leftGrabber.setPosition(GRABBERS_OPEN);
-        robot.clawsOpen = true;
-        telemetry.addData("End", null);
-        telemetry.update();
-        if(robot.rightGrabber.getPosition() != GRABBERS_OPEN || robot.leftGrabber.getPosition() != GRABBERS_OPEN) {
-            telemetry.addData("Interrupted", null);
-            telemetry.update();
+    public void cyclePosition() {
+        switch (x) {
+            case 0:
+                currentPosition += 1;
+                setPosition(position[currentPosition]);
+                break;
+            case 1:
+                currentPosition -= 1;
+                setPosition(position[currentPosition]);
+                break;
+            default:
+                break;
         }
     }
 
-    public void Close(){
-        telemetry.addData("Initialized", null);
-        telemetry.update();
-        robot.rightGrabber.setPosition(GRABBERS_CLOSED);
-        robot.leftGrabber.setPosition(GRABBERS_CLOSED);
-        robot.clawsOpen = false;
-        telemetry.addData("End", null);
-        telemetry.update();
-        if(robot.rightGrabber.getPosition() != GRABBERS_CLOSED || robot.leftGrabber.getPosition() != GRABBERS_CLOSED) {
-            telemetry.addData("Interrupted", null);
-            telemetry.update();
-        }
+    private enum Position {
+        GRABBERS_CLOSE, GRABBERS_OPEN
     }
 }
-

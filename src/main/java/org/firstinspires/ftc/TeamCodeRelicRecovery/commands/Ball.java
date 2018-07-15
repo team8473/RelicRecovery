@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
@@ -15,6 +16,7 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.ball;
 /**
  * Knocking the correct ball off in autonomous
  */
+@Disabled
 public class Ball extends LinearOpMode {
 
     private HardwarePhynn phynn = new HardwarePhynn();

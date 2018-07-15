@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
+@Disabled
 public class HardwarePhynn {
 
     public static Ball ball;
@@ -36,6 +38,12 @@ public class HardwarePhynn {
     public static final double GRABBERS_OPEN = 0.25;
     public static final double GRABBERS_CLOSED = 0.65;
     public static final double GRABBERS_HALF = 0.45;
+
+    //Lift Variables
+    public static final int UP = 1;
+    public static final int DOWN = 0;
+    public static final int MAX_POS = 0;
+    public static final int MIN_POS = 0;
 
     //Strings
     public static final String RIGHT = "RIGHT";

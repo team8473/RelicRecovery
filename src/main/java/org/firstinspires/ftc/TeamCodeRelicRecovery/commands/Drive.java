@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.Range;
 
@@ -12,6 +13,7 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.SLOW_DRI
 /**
  * Driving the robot
  */
+@Disabled
 public class Drive extends LinearOpMode{
 
     private HardwarePhynn phynn = new HardwarePhynn();

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
@@ -8,6 +9,7 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SP
 /**
  * The end of every autonomous
  */
+@Disabled
 public class End extends LinearOpMode {
 
     private Encoders encoders = new Encoders();
