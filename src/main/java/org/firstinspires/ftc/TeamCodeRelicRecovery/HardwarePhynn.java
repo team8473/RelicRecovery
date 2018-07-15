@@ -70,7 +70,6 @@ public class HardwarePhynn {
 
     //Booleans
     public boolean see = true;
-    public boolean clawsOpen = true;
     final boolean left = vuMark == RelicRecoveryVuMark.LEFT;
     final boolean right = vuMark == RelicRecoveryVuMark.RIGHT;
     final boolean center = vuMark == RelicRecoveryVuMark.CENTER;

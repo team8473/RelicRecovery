@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SPEED;
-
 /**
  * The end of every autonomous
  */
@@ -23,7 +22,7 @@ public class End extends LinearOpMode {
 
     public void Finish() {
         encoders.encoderDrive(DRIVE_SPEED,8.5);
-        grabbers.Open();
+        grabbers.cyclePosition();
         sleep(500);
         encoders.encoderDrive(DRIVE_SPEED,-3.5);
         phynn.see = false;

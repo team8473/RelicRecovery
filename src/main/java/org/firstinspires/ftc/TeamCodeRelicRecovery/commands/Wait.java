@@ -22,11 +22,4 @@ public class Wait extends LinearOpMode {
             telemetry.addData("Time : ", timer.milliseconds());
         }
     }
-
-    public void waitSeconds(double time) {
-        timer.reset();
-        while(timer.seconds() <= time){
-            telemetry.addData("Time : ", timer.seconds());
-        }
-    }
 }
