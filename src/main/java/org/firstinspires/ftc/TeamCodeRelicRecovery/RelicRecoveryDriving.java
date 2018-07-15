@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
-import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Wait;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DOWN;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.UP;

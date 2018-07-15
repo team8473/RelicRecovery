@@ -18,7 +18,7 @@ public class Start extends LinearOpMode {
     }
 
     public void startUp(){
-        grabbers.Close();
+        grabbers.cyclePosition();
         phynn.liftMotor.setPower(.4);
         sleep(1000);
         phynn.liftMotor.setPower(0);

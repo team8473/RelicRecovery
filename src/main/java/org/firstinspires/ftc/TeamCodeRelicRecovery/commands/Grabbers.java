@@ -16,11 +16,11 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.GRABBERS
 public class Grabbers extends LinearOpMode{
 
     private HardwarePhynn phynn = new HardwarePhynn();
+    private Wait wait = new Wait();
 
-    private int x = 0;
     private int currentPosition = 0;
 
-    public static Position[] position = new Position[]{Position.GRABBERS_OPEN, Position.GRABBERS_CLOSE};
+    private static Position[] position = new Position[]{Position.GRABBERS_OPEN, Position.GRABBERS_CLOSE};
 
     @Override
     public void runOpMode(){
@@ -37,10 +37,12 @@ public class Grabbers extends LinearOpMode{
             case GRABBERS_OPEN:
                 phynn.rightGrabber.setPosition(GRABBERS_OPEN);
                 phynn.leftGrabber.setPosition(GRABBERS_OPEN);
+                wait.waitMilliseconds(250);
                 break;
             case GRABBERS_CLOSE:
                 phynn.rightGrabber.setPosition(GRABBERS_CLOSED);
                 phynn.leftGrabber.setPosition(GRABBERS_CLOSED);
+                wait.waitMilliseconds(250);
                 break;
             default:
                 break;
@@ -48,7 +50,7 @@ public class Grabbers extends LinearOpMode{
     }
 
     public void cyclePosition() {
-        switch (x) {
+        switch (currentPosition) {
             case 0:
                 currentPosition += 1;
                 setPosition(position[currentPosition]);
