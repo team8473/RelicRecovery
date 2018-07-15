@@ -37,25 +37,27 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.TeamCode.Hardware;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
-import java.util.Locale;
+import static org.firstinspires.ftc.TeamCode.Hardware.kD;
+import static org.firstinspires.ftc.TeamCode.Hardware.kI;
+import static org.firstinspires.ftc.TeamCode.Hardware.kP;
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
 
 @Autonomous(name = "Sensor: BNO055 IMU", group = "Sensor")
 @Disabled
 public class GyroTest extends LinearOpMode {
 
-    private HardwarePhynn phynn = new HardwarePhynn();
+    private Hardware phynn = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
     private double lastError, integralError;
     private double goalAngle;
 
-    Orientation angles;
+    private Orientation angles;
 
     @Override public void runOpMode() {
 
@@ -82,7 +84,7 @@ public class GyroTest extends LinearOpMode {
 
     }
 
-    public void encoderDrive(double speed,
+    public void gyroDrive(double speed,
                               double leftInches, double rightInches,
                               double timeoutS) {
         int newLeftTarget;
@@ -90,8 +92,8 @@ public class GyroTest extends LinearOpMode {
 
         if (opModeIsActive()) {
 
-            newLeftTarget = phynn.motorRight.getCurrentPosition() + (int) (leftInches * phynn.COUNTS_PER_INCH);
-            newRightTarget = phynn.motorLeft.getCurrentPosition() + (int) (rightInches * phynn.COUNTS_PER_INCH);
+            newLeftTarget = phynn.motorRight.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newRightTarget = phynn.motorLeft.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
             phynn.motorRight.setTargetPosition(newLeftTarget);
             phynn.motorLeft.setTargetPosition(newRightTarget);
 
@@ -110,9 +112,9 @@ public class GyroTest extends LinearOpMode {
                 integralError += error;
                 double deltaError = error - lastError;
 
-                double Pterm = phynn.kP * error;
-                double Iterm = phynn.kI * integralError;
-                double Dterm = phynn.kD * deltaError;
+                double Pterm = kP * error;
+                double Iterm = kI * integralError;
+                double Dterm = kD * deltaError;
 
                 double correction = Pterm + Iterm + Dterm;
                 correction = Math.min(0.4, correction);
@@ -134,8 +136,5 @@ public class GyroTest extends LinearOpMode {
             phynn.motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
-    }
-    String formatDegrees(double degrees){
-        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
 }

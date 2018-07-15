@@ -8,9 +8,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Drive;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Grabbers;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Lift;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Wait;
 
-@TeleOp(name = "RelicRecovery", group = "Gabe")
-//@Disabled
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DOWN;
+import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.UP;
+
+@TeleOp(name = "RelicRecovery", group = "Tank")
 public class RelicRecoveryDriving extends OpMode{
 
     private HardwarePhynn phynn    = new HardwarePhynn();
@@ -19,7 +22,6 @@ public class RelicRecoveryDriving extends OpMode{
     private Drive drive      = new Drive();
     private Lift lift      = new Lift();
 
-
     @Override
     public void init() {
         phynn.init(hardwareMap);
@@ -27,7 +29,7 @@ public class RelicRecoveryDriving extends OpMode{
         phynn.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         phynn.motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        phynn.servo3.setPosition(0.85);
+        phynn.armServo.setPosition(0.85);
     }
 
     @Override
@@ -41,23 +43,18 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void loop() {
-        //Lift
+        //Lifting
         lift.lift();
 
-        //Grabbing
-        if (gamepad2.a && phynn.Claws_Open) {
-            claw.Close();
-            timer.reset();
-            while(timer.milliseconds() <= 250){
-                telemetry.addData("Wait", timer.milliseconds());
-            }
+        if(gamepad2.dpad_up) {
+            lift.cycleLift(UP);
+        } else if(gamepad2.dpad_down) {
+            lift.cycleLift(DOWN);
         }
-        if (gamepad2.a && !phynn.Claws_Open) {
-            claw.Open();
-            timer.reset();
-            while(timer.milliseconds() <= 250){
-                telemetry.addData("Wait", timer.milliseconds());
-            }
+
+        //Grabbing
+        if (gamepad2.a) {
+            claw.cyclePosition();
         }
         if (gamepad2.b) {
             claw.Half();
@@ -77,6 +74,5 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void stop() {
-        claw.Open();
     }
 }

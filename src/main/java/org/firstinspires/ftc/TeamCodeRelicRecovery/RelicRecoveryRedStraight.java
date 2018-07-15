@@ -14,7 +14,7 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SP
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.LEFT;
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.RIGHT;
 
-@Autonomous(name="RedStraight", group="Gabe")
+@Autonomous(name="RedStraight", group="Red")
 //@Disabled
 public class RelicRecoveryRedStraight extends LinearOpMode {
 
@@ -38,62 +38,57 @@ public class RelicRecoveryRedStraight extends LinearOpMode {
         phynn.motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         while (opModeIsActive()) {
-            if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.See) {
-                if (phynn.RRRight) {
+            if (phynn.vuMark != RelicRecoveryVuMark.UNKNOWN && phynn.see) {
+                if (phynn.right) {
                     start.startUp();
-                    if (phynn.Red_Ball) {
+                    if (phynn.redBall) {
                         ball.Red("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 22.5);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 6,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 6);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-                    } else if (phynn.Blue_Ball) {
+                    } else if (phynn.blueBall) {
                         ball.Blue("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 26,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 26);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 7, 10);
+                        encoders.encoderDrive(DRIVE_SPEED, 7);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-
                     }
-
-                }else if (phynn.RRCenter) {
+                } else if (phynn.center) {
                     start.startUp();
-                    if (phynn.Red_Ball) {
+                    if (phynn.redBall) {
                         ball.Red("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 22.5);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 15, 10);
+                        encoders.encoderDrive(DRIVE_SPEED, 15);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-                    } else if (phynn.Blue_Ball) {
+                    } else if (phynn.blueBall) {
                         ball.Blue("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 26,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 26);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 15,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 15);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-
                     }
-
-                }else if (phynn.RRLeft) {
+                } else if (phynn.left) {
                     start.startUp();
-                    if (phynn.Red_Ball) {
+                    if (phynn.redBall) {
                         ball.Red("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 22.5,10);
+                        encoders.encoderDrive(DRIVE_SPEED, 22.5);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 21.5, 10);
+                        encoders.encoderDrive(DRIVE_SPEED, 21.5);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish(); 
-                    } else if (phynn.Blue_Ball) {
+                    } else if (phynn.blueBall) {
                         ball.Blue("RED");
-                        encoders.encoderDrive(DRIVE_SPEED, 26,15);
+                        encoders.encoderDrive(DRIVE_SPEED, 26);
                         encoders.encoderTurn(90, LEFT);
-                        encoders.encoderDrive(DRIVE_SPEED, 23.5,0);
+                        encoders.encoderDrive(DRIVE_SPEED, 23.5);
                         encoders.encoderTurn(90, RIGHT);
                         end.Finish();
-
                     }
                 }
             }

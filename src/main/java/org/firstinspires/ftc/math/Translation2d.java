@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.math;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import java.text.DecimalFormat;
 
 /**
  * A translation in a 2d coordinate frame. Translations are simply shifts in an (x, y) plane.
  */
+@Disabled
 public class Translation2d {
     protected static final Translation2d kIdentity = new Translation2d();
 

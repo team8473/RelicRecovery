@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.math;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import static org.firstinspires.ftc.math.Util.epsilonEquals;
 
 import java.text.DecimalFormat;
@@ -9,6 +11,7 @@ import java.text.DecimalFormat;
  *
  * Inspired by Sophus (https://github.com/strasdat/Sophus/tree/master/sophus)
  */
+@Disabled
 public class Rotation2d {
 
     protected static final Rotation2d kIdentity = new Rotation2d();

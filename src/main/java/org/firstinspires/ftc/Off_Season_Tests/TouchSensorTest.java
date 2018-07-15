@@ -24,18 +24,13 @@ public class TouchSensorTest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-
-            if (digitalTouch.getState() == false)
-            {
+            if (digitalTouch.getState()) {
                 telemetry.addData("Touch", "Is Pressed");
                 telemetry.update();
-            }
-            else
-            {
+            } else {
                 telemetry.addData("Touch", "Is Not Pressed");
                 telemetry.update();
             }
         }
-
     }
 }
