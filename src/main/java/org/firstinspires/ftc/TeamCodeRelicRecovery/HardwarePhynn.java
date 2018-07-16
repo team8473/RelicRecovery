@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,6 +46,11 @@ public class HardwarePhynn {
     public static final int MAX_POS = 0;
     public static final int MIN_POS = 0;
 
+    //Gyro Variables
+    public static final double kP = 0;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
     //Strings
     public static final String RIGHT = "RIGHT";
     public static final String LEFT  = "LEFT";
@@ -59,6 +65,7 @@ public class HardwarePhynn {
     public DcMotor motorLeft = null;
     public DcMotor liftMotor = null;
     public Servo armServo = null;
+    public BNO055IMU imu = null;
 
     //Vuforia
     private int cameraMonitorViewId;
