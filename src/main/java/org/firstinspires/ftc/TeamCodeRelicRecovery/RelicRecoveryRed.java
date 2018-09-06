@@ -7,6 +7,7 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Ball;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Encoders;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.End;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.commands.Start;
+import org.firstinspires.ftc.TeamCodeRelicRecovery.paths.RedCenter;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.DRIVE_SPEED;
@@ -30,6 +31,8 @@ public class RelicRecoveryRed extends LinearOpMode {
 
         phynn.init(hardwareMap);
 
+        RedCenter center = new RedCenter();
+
         waitForStart();
 
         phynn.motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -45,11 +48,11 @@ public class RelicRecoveryRed extends LinearOpMode {
                     start.startUp();
                     if (phynn.redBall) {
                         balls.Red(RED);
+                        center.buildPath();
                         end.Finish();
                     }else if (phynn.blueBall) {
                         balls.Blue(RED);
-                        encoders.encoderDrive(DRIVE_SPEED, 37);
-                        encoders.encoderTurn(90, RIGHT); //90 degree turn
+                        center.buildPath();
                         end.Finish();
                     }
                 }else if (phynn.right) {

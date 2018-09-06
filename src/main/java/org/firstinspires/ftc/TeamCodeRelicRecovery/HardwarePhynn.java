@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -34,6 +35,7 @@ public class HardwarePhynn {
     public static final double SLOW_DRIVE_SPEED = 0.4;
     public static final double TURN_SPEED = 0.4;
     public static final double ROBOT_CIRCUMFERENCE = (Math.PI * SQUARE_ROOT);
+    public ElapsedTime runtime = new ElapsedTime();
 
     //Grabber Variables
     public static final double GRABBERS_OPEN = 0.25;
