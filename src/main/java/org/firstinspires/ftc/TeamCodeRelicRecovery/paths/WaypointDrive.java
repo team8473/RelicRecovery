@@ -9,7 +9,6 @@ import org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn;
 
 import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.COUNTS_PER_INCH;
 
-
 @Autonomous(name="Encoders", group="Gabe")
 @Disabled
 public class WaypointDrive extends LinearOpMode {

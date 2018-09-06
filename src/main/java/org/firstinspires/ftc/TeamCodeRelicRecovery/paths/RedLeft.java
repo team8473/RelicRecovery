@@ -31,4 +31,5 @@ public class RedLeft implements PathContainer {
     // WAYPOINT_DATA: [{"position":{"x":24,"y":49},"speed":0,"radius":0,"comment":""},{"position":{"x":24,"y":75},"speed":0,"radius":0,"comment":""},{"position":{"x":10,"y":75},"speed":60,"radius":0,"comment":""}]
     // IS_REVERSED: false
     // FILE_NAME: RedLeft
+
 }

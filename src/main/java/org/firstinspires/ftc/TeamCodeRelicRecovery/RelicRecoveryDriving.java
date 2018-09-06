@@ -42,9 +42,9 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void loop() {
+
         //Lifting
         lift.lift();
-
         if(gamepad2.dpad_up) {
             lift.cycleLift(UP);
         } else if(gamepad2.dpad_down) {

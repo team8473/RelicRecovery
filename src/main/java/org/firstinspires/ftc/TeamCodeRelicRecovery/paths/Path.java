@@ -3,6 +3,7 @@ package org.firstinspires.ftc.TeamCodeRelicRecovery.paths;
 import org.firstinspires.ftc.TeamCodeRelicRecovery.paths.WaypointDrive;
 
 public class Path {
+
     private static final double ROBOT_WIDTH = 17.2;
     private static final double WHEEL_DIAMETER = 4;
     private static final double CIRCUMFRENCE = Math.PI * WHEEL_DIAMETER;

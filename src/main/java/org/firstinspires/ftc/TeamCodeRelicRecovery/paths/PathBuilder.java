@@ -40,6 +40,7 @@ public class PathBuilder {
      *
      * @see PathBuilder
      */
+
     public static class Waypoint {
         Translation2d position;
         double radius;
