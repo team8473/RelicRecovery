@@ -15,11 +15,11 @@ import static org.firstinspires.ftc.TeamCodeRelicRecovery.HardwarePhynn.UP;
 @TeleOp(name = "RelicRecovery", group = "Tank")
 public class RelicRecoveryDriving extends OpMode{
 
-    private HardwarePhynn phynn    = new HardwarePhynn();
-    private ElapsedTime timer    = new ElapsedTime();
-    private Grabbers claw      = new Grabbers();
-    private Drive drive      = new Drive();
-    private Lift lift      = new Lift();
+    private HardwarePhynn phynn = new HardwarePhynn();
+    private ElapsedTime   timer = new ElapsedTime();
+    private Grabbers      claw  = new Grabbers();
+    private Drive         drive = new Drive();
+    private Lift          lift  = new Lift();
 
     @Override
     public void init() {
@@ -42,9 +42,9 @@ public class RelicRecoveryDriving extends OpMode{
 
     @Override
     public void loop() {
+
         //Lifting
         lift.lift();
-
         if(gamepad2.dpad_up) {
             lift.cycleLift(UP);
         } else if(gamepad2.dpad_down) {

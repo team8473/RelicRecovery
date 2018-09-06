@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.TeamCodeRelicRecovery;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -33,6 +35,7 @@ public class HardwarePhynn {
     public static final double SLOW_DRIVE_SPEED = 0.4;
     public static final double TURN_SPEED = 0.4;
     public static final double ROBOT_CIRCUMFERENCE = (Math.PI * SQUARE_ROOT);
+    public ElapsedTime runtime = new ElapsedTime();
 
     //Grabber Variables
     public static final double GRABBERS_OPEN = 0.25;
@@ -44,6 +47,11 @@ public class HardwarePhynn {
     public static final int DOWN = 0;
     public static final int MAX_POS = 0;
     public static final int MIN_POS = 0;
+
+    //Gyro Variables
+    public static final double kP = 0;
+    public static final double kI = 0;
+    public static final double kD = 0;
 
     //Strings
     public static final String RIGHT = "RIGHT";
@@ -59,6 +67,7 @@ public class HardwarePhynn {
     public DcMotor motorLeft = null;
     public DcMotor liftMotor = null;
     public Servo armServo = null;
+    public BNO055IMU imu = null;
 
     //Vuforia
     private int cameraMonitorViewId;
